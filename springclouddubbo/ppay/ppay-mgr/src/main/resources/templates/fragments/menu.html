@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div th:fragment="leftMenu">
+    <a class="menu-toggler" id="menu-toggler" href="#">
+        <span class="menu-text"></span>
+    </a>
+
+    <div class="sidebar" id="sidebar">
+        <script type="text/javascript">
+            try {
+                ace.settings.check('sidebar', 'fixed')
+            } catch (e) {
+            }
+        </script>
+
+        <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+
+            <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                <span class="btn btn-success"></span>
+
+                <span class="btn btn-info"></span>
+
+                <span class="btn btn-warning"></span>
+
+                <span class="btn btn-danger"></span>
+            </div>
+        </div><!-- #sidebar-shortcuts -->
+        <ul id="menuList" class="nav nav-list">
+            <li style="font-weight: bold;">
+                <a href="index.html">
+                    <i class="icon-dashboard"></i>
+                    <span class="menu-text"> 控制台 </span>
+                </a>
+            </li>
+
+            <!--menu start-->
+            <li th:each="menu : ${session.menuList}">
+                <a th:href="${menu.action}" th:if="${#lists.isEmpty(menu.nodes)}">
+                    <i class="icon-double-angle-right"></i>
+                    <span th:text="${menu.menuname}">  </span>
+                </a>
+                <a href="#" class="dropdown-toggle" th:if="${not #lists.isEmpty(menu.nodes)}">
+                    <i class="icon-list"></i>
+                    <span class="menu-text" th:text="${menu.menuname}">  </span>
+
+                    <b class="arrow icon-angle-down"></b>
+                </a>
+
+                <!--second-->
+
+                <ul class="submenu" th:if="${not #lists.isEmpty(menu.nodes)}">
+                    <li th:each="node : ${menu.nodes}">
+                        <a th:href="${node.action}" th:if="${#lists.isEmpty(node.nodes)}">
+                            <i class="icon-double-angle-right"></i>
+                            <span th:text="${node.menuname}">  </span>
+                        </a>
+                        <a href="#" class="dropdown-toggle" th:if="${not #lists.isEmpty(node.nodes)}">
+                            <i class="icon-double-angle-right"></i>
+                            <span th:text="${node.menuname}">  </span>
+                            <b class="arrow icon-angle-down"></b>
+                        </a>
+
+                        <ul class="submenu" th:if="${not #lists.isEmpty(node.nodes)}">
+                            <li th:each="cnode : ${node.nodes}">
+                                <a th:href="${cnode.action}" th:if="${#lists.isEmpty(cnode.nodes)}">
+                                    <i class="icon-leaf"></i>
+                                    <span th:text="${cnode.menuname}">  </span>
+                                </a>
+
+                                <a href="#" class="dropdown-toggle" th:if="${not #lists.isEmpty(cnode.nodes)}">
+                                    <i class="icon-pencil"></i>
+                                    <span th:text="${cnode.menuname}"></span>
+                                    <b class="arrow icon-angle-down"></b>
+                                </a>
+                                <ul class="submenu" th:if="${not #lists.isEmpty(cnode.nodes)}">
+                                    <li th:each="snode : ${cnode.nodes}">
+                                        <a th:href="${snode.action}" th:if="${#lists.isEmpty(snode.nodes)}">
+                                            <i class="icon-plus"></i>
+                                            <span th:text="${snode.menuname}">  </span>
+                                        </a>
+                                        <a href="#" class="dropdown-toggle" th:if="${not #lists.isEmpty(snode.nodes)}">
+                                            <i class="icon-pencil"></i>
+                                            <span th:text="${snode.menuname}">  </span>
+                                            <b class="arrow icon-angle-down"></b>
+                                        </a>
+                                        <ul class="submenu" th:if="${not #lists.isEmpty(snode.nodes)}">
+                                            <li th:each="znode : ${snode.nodes}">
+                                                <a th:href="${znode.action}" >
+                                                    <i class="icon-eye-open"></i>
+                                                    <span th:text="${znode.menuname}">  </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!--second end-->
+            </li>
+            <!--menu end-->
+        </ul><!-- /.nav-list -->
+        <div class="sidebar-collapse" id="sidebar-collapse">
+            <i class="icon-double-angle-left" data-icon1="icon-double-angle-left"
+               data-icon2="icon-double-angle-right"></i>
+        </div>
+
+        <script type="text/javascript">
+            try {
+                ace.settings.check('sidebar', 'collapsed')
+            } catch (e) {
+            }
+        </script>
+        <script src="js/module/ace/js/jquery-2.0.3.min.js"></script>
+        <script src="js/main/menu.js"></script>
+    </div>
+</div><!-- /.container -->
+</body>
+</html>

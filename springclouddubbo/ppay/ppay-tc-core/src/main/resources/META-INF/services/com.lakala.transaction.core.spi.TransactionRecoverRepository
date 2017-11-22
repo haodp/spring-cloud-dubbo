@@ -1,0 +1,5 @@
+com.lakala.transaction.core.spi.repository.JdbcTransactionRecoverRepository
+com.lakala.transaction.core.spi.repository.FileTransactionRecoverRepository
+com.lakala.transaction.core.spi.repository.MongoTransactionRecoverRepository
+com.lakala.transaction.core.spi.repository.RedisTransactionRecoverRepository
+com.lakala.transaction.core.spi.repository.ZookeeperTransactionRecoverRepository

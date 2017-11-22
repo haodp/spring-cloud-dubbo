@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lakala.dao.manual.mapper.MalRoleMapper">
+    <resultMap id="UserResultMap" type="com.lakala.dao.manual.model.MalUser">
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="roleName" jdbcType="VARCHAR" property="roleName"/>
+        <result column="gender" jdbcType="TINYINT" property="gender"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="role_id" jdbcType="INTEGER" property="roleId"/>
+    </resultMap>
+
+    <insert id="insertRoleMenuBatch" parameterType="java.util.List">
+        INSERT INTO role_menu
+        (role_id,
+        menu_id,
+        create_user_id,
+        create_time,
+        flag)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.roleId},
+            #{item.menuId},
+            #{item.createUserId},
+            #{item.createTime},
+            #{item.flag}
+            )
+        </foreach>
+    </insert>
+
+    <insert id="insertRolePermBatch" parameterType="java.util.List">
+        INSERT INTO role_permission
+        (role_id,
+        permission_id,
+        create_user_id,
+        create_time,
+        flag)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.roleId},
+            #{item.permissionId},
+            #{item.createUserId},
+            #{item.createTime},
+            #{item.flag}
+            )
+        </foreach>
+    </insert>
+</mapper>

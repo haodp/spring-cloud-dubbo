@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lakala.ppaygate.mapper.StockMapper" >
+
+  <resultMap id="BaseResultMap" type="com.lakala.ppaygate.api.entity.Stock" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="num" property="number" jdbcType="INTEGER" />
+    <result column="name" property="type" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id,CREATE_TIME,NUM,NAME
+  </sql>
+
+  <insert id="save" parameterType="com.lakala.ppaygate.api.entity.Stock" >
+    INSERT INTO stock (<include refid="Base_Column_List" />)
+    values ( #{id,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{number,jdbcType=INTEGER},#{name,jdbcType=VARCHAR})
+  </insert>
+
+</mapper>

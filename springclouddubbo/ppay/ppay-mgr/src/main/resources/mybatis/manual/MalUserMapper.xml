@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lakala.dao.manual.mapper.MalUserMapper">
+    <resultMap id="UserResultMap" type="com.lakala.dao.manual.model.MalUser">
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="roleName" jdbcType="VARCHAR" property="roleName"/>
+        <result column="gender" jdbcType="TINYINT" property="gender"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="role_id" jdbcType="INTEGER" property="roleId"/>
+    </resultMap>
+
+    <select id="getUserList" parameterType="com.lakala.model.query.UserQO" resultMap="UserResultMap">
+        SELECT
+        u.uuid user_id,
+        u.username,
+        u.real_name,
+        u.phone,
+        u.email,
+        u.gender,
+        u.status,
+        u.create_time,
+        u.modify_time,
+        r.rolename,
+        r.uuid role_id
+        FROM
+        user u
+        LEFT JOIN
+        user_role ur ON u.uuid = ur.user_id
+        LEFT JOIN
+        role r ON r.uuid = ur.role_id
+        WHERE
+        u.flag = 1
+        <if test="username != null">
+            AND u.username like CONCAT(CONCAT('%', #{username}), '%')
+        </if>
+        ORDER BY u.uuid DESC
+    </select>
+
+    <select id="getUserTotalCount" parameterType="com.lakala.model.query.UserQO" resultType="java.lang.Integer">
+        SELECT
+        COUNT(DISTINCT u.uuid) totalCount
+        FROM
+        user u
+        LEFT JOIN
+        user_role ur ON u.uuid = ur.user_id
+        LEFT JOIN
+        role r ON r.uuid = ur.role_id
+        WHERE
+        u.flag = 1
+        <if test="username != null">
+            AND u.username like CONCAT(CONCAT('%', #{username}), '%')
+        </if>
+    </select>
+</mapper>

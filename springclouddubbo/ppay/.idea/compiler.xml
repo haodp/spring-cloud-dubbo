@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="config-client" />
+        <module name="config-server" />
+        <module name="eureka-server" />
+        <module name="gateApi" />
+        <module name="gateConsume" />
+        <module name="gateProvider" />
+        <module name="ppay-admin-server" />
+        <module name="ppay-config" />
+        <module name="ppay-config-client" />
+        <module name="ppay-mgr" />
+        <module name="ppay-tc-common" />
+        <module name="ppay-tc-core" />
+        <module name="ppay-tc-tx-dubbo" />
+        <module name="ppay-tc-tx-manager" />
+        <module name="ppayGateApi" />
+        <module name="ppayGateProvider" />
+        <module name="zipkin-api" />
+        <module name="zipkin-custome" />
+        <module name="zipkin-monitor" />
+        <module name="zipkin-provider" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.8">
+      <module name="config-client" target="1.8" />
+      <module name="config-server" target="1.8" />
+      <module name="eureka-server" target="1.8" />
+      <module name="gate" target="1.8" />
+      <module name="gateApi" target="1.8" />
+      <module name="gateConsume" target="1.8" />
+      <module name="gateProvider" target="1.8" />
+      <module name="ppay" target="1.8" />
+      <module name="ppay-admin-server" target="1.8" />
+      <module name="ppay-config" target="1.8" />
+      <module name="ppay-config-client" target="1.6" />
+      <module name="ppay-eureka" target="1.8" />
+      <module name="ppay-eureka-server" target="1.8" />
+      <module name="ppay-mgr" target="1.8" />
+      <module name="ppay-tc-common" target="1.8" />
+      <module name="ppay-tc-core" target="1.8" />
+      <module name="ppay-tc-tx-dubbo" target="1.8" />
+      <module name="ppay-tc-tx-manager" target="1.8" />
+      <module name="ppayGateApi" target="1.8" />
+      <module name="ppayGateProvider" target="1.8" />
+      <module name="zipkin-monitor" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,2 @@
+spanConsumer=com.lakala.zipkin.ConsumerSpanFilter
+spanProvider=com.lakala.zipkin.ProviderSpanFilter

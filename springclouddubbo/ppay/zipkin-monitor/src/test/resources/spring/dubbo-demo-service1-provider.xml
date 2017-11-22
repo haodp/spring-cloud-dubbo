@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:protocol name="dubbo" port="20881"/>
+    <dubbo:application name="provider1"/>
+    <!--<dubbo:registry address="N/A"/>-->
+
+    <dubbo:registry protocol="zookeeper" address="127.0.0.1:2181" />
+
+    <bean id="service1" class="com.lakala.zipkin.api.Service1Impl"/>
+
+    <dubbo:service interface="com.lakala.zipkin.api.Service1" ref="service1"
+                   retries="0"/>
+
+    <dubbo:reference id="service2" interface="com.lakala.zipkin.api.Service2"
+                     url="dubbo://127.0.0.1:20882"/>
+
+    <dubbo:provider filter="spanProvider" retries="0" timeout="300000" />
+    <dubbo:consumer filter="spanConsumer" retries="0" timeout="300000"  />
+</beans>

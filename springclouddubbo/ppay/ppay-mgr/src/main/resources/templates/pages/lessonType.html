@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<title>课程管理</title>
+		<link type="image/x-icon" href="images/favicon.ico" rel="shortcut icon">
+		<meta name="keywords" content="课程管理" />
+		<meta name="description" content="课程管理" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- basic styles -->
+
+		<link href="js/module/ace/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="js/module/ace/css/font-awesome.min.css" />
+
+		<!--[if IE 7]>
+		  <link rel="stylesheet" href="js/module/ace/css/font-awesome-ie7.min.css" />
+		<![endif]-->
+
+		<!-- page specific plugin styles -->
+		<!-- fonts
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+		-->
+		<!-- ace styles -->
+
+		<link rel="stylesheet" href="js/module/ace/css/ace.min.css" />
+		<link rel="stylesheet" href="js/module/ace/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="js/module/ace/css/ace-skins.min.css" />
+
+		<!--[if lte IE 8]>
+		  <link rel="stylesheet" href="js/module/ace/css/ace-ie.min.css" />
+		<![endif]-->
+		<!-- inline styles related to this page -->
+		<!-- ace settings handler -->
+		<link rel="stylesheet" href="js/module/ace/css/chosen.css" />
+		<script src="js/module/ace/js/ace-extra.min.js"></script>
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+		<!--[if lt IE 9]>
+		<script src="js/module/ace/js/html5shiv.js"></script>
+		<script src="js/module/ace/js/respond.min.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+	<div th:include="../fragments/header :: topHeader"></div>
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+			<div th:include="../fragments/menu :: leftMenu"></div>
+
+				<div class="main-content">
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="icon-home home-icon"></i>
+								<a href="#">课程管理</a>
+							</li>
+							<li>
+								<a href="#" class="active">课程分类</a>
+							</li>
+						</ul><!-- .breadcrumb -->
+
+						<div class="nav-search" id="nav-search">
+							<form class="form-search">
+								<span class="input-icon">
+									<input type="text" placeholder="搜索 ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+									<i class="icon-search nav-search-icon"></i>
+								</span>
+							</form>
+						</div><!-- #nav-search -->
+					</div>
+
+					<div class="page-content" ng-app="mainApp" ng-controller="mainCtrl">
+						<div class="row">
+								<h4 class="pink">
+									<i class="icon-leaf green"></i>
+									<label class="green"> 菜单列表 </label>
+								</h4>
+							<h5 class="pink" style="margin-bottom: 50px;">
+								<i class="icon-hand-right icon-animated-hand-pointer blue"></i>
+								<button class="btn btn-xs btn-pink" type="button" ng-click="createModal()">
+									<i class="icon-ok"></i>
+									新建菜单
+								</button>
+								<div id="warning-msg" class="alert alert-success" style="display:none;text-align: center;">
+									<a href="#" class="close" data-dismiss="alert">
+										&times;
+									</a>
+									<strong>操作成功！</strong>
+								</div>
+							</h5>
+							<div style="margin: 10px;">
+								<span class="input-icon">
+									<input type="text" placeholder="菜单名称 ..." class="nav-search-input" autocomplete="off" name="menuname"  ng-model="searchText.menuname" />
+									<i class="icon-search nav-search-icon"></i>
+								</span>
+							</div>
+								<div>
+
+									<div class="col-xs-12">
+										<div class="table-responsive">
+										<table class="table table-striped table-bordered table-hover table-checkable dataTable">
+											<thead>
+											<tr>
+												<th ng-click="predicate = 'id'; reverse=!reverse"><a style="color: #707070;cursor: pointer;text-decoration:none;">id</a></th>
+												<th ng-click="predicate = 'menuname'; reverse=!reverse"><a style="color: #707070;cursor: pointer;text-decoration:none;">菜单名称</a></th>
+												<th>状态</th>
+												<th>创建时间</th>
+												<th></th>
+											</tr>
+											</thead>
+											<tbody>
+											<tr ng-repeat="menu in menuList  | filter: searchText | orderBy: predicate:reverse">
+												<td>{{ menu.menuId }}</td>
+												<td>{{ menu.menuname }}</td>
+												<td>{{ menu.action }}</td>
+												<td>{{ menu.roleCreateTime }}</td>
+												<td>
+													<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+														<!--<a class="blue" href="#" ng-click="viewModal(role)">-->
+															<!--<i class="icon-zoom-in bigger-130"></i>-->
+														<!--</a>-->
+
+														<a class="green" href="#"  ng-click="editModal(menu)">
+															<i class="icon-pencil bigger-130"></i>
+														</a>
+
+														<a class="red" href="#"  ng-click="deleteModal(menu)">
+															<i class="icon-trash bigger-130"></i>
+														</a>
+													</div>
+												</td>
+											</tr>
+											</tbody>
+										</table>
+										</div>
+										<!-- 分页 -->
+										<div class="fixed-table-pagination" style="display: block;">
+											<div class="pull-left pagination-detail"><span class="pagination-info" style="float: left !important;margin: 20px 0;">每页显示条数：</span>
+												<span class="page-list" style="float: left !important;margin: 15px 0;">
+													<select ng-options="pageSize for pageSize in pageSizeList" ng-model="pageSize" ng-change="changePageSize(pageSize)">
+													</select>
+												</span>
+											</div>
+											<div class="fixed-table-pagination" style="display: block;">
+												<div class="pull-right pagination">
+													<ul class="pagination">
+													</ul>
+												</div>
+											</div>
+										</div>
+										<!-- 分页结束 -->
+									</div>
+								</div>
+
+							<div id="modal-view" class="modal fade" tabindex="-1">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header no-padding">
+											<div class="table-header">
+												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+													<span class="white">&times;</span>
+												</button>
+												菜单信息
+											</div>
+										</div>
+
+										<div class="modal-body no-padding">
+											<div class="profile-user-info profile-user-info-striped">
+												<div class="profile-info-row">
+													<div class="profile-info-name"> 用户名： </div>
+
+													<div class="profile-info-value">
+														<span class="editable editable-click">{{userView.username}}</span>
+													</div>
+												</div>
+
+												<div class="profile-info-row">
+													<div class="profile-info-name"> 真实姓名： </div>
+
+													<div class="profile-info-value">
+														<i class="icon-map-marker light-orange bigger-110"></i>
+														<span class="editable editable-click" id="city">{{userView.realName}}</span>
+													</div>
+												</div>
+
+												<div class="profile-info-row">
+													<div class="profile-info-name">菜单：</div>
+
+													<div class="profile-info-value">
+														<span class="editable editable-click" id="age">{{userView.roleName}} </span>
+													</div>
+												</div>
+
+												<div class="profile-info-row">
+													<div class="profile-info-name"> 电话： </div>
+
+													<div class="profile-info-value">
+														<span class="editable editable-click" id="signup">{{userView.phone}} </span>
+													</div>
+												</div>
+
+												<div class="profile-info-row">
+													<div class="profile-info-name"> 邮箱： </div>
+
+													<div class="profile-info-value">
+														<span class="editable editable-click" id="login">{{userView.email}} </span>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="modal-footer no-margin-top">
+											<button class="btn btn-sm btn-danger pull-right" data-dismiss="modal">
+												<i class="icon-remove"></i>
+												关闭
+											</button>
+										</div>
+									</div><!-- /.modal-content -->
+								</div><!-- /.modal-dialog -->
+							</div><!-- /.modal -->
+
+							<!--modal-create-->
+							<div id="modal-create" class="modal fade" tabindex="-1">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header no-padding">
+											<div class="table-header">
+												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+													<span class="white">&times;</span>
+												</button>
+												新建菜单
+											</div>
+										</div>
+
+										<form class="modal-body no-padding" name="roleCreateForm" ng-submit="createRole(roleCreate,roleCreateForm.$valid)" novalidate>
+											<div class="space-5"></div>
+											<div class="profile-user-info profile-user-info-striped">
+
+												<div class="profile-info-row">
+													<div class="profile-info-name"> 菜单名称： </div>
+
+													<div class="profile-info-value">
+														<input type="text" ng-model="roleCreate.roleName" name ="roleName" placeholder="菜单名称" required />
+                                                        <p style="color:red" ng-show="roleCreateForm.roleName.$dirty && roleCreateForm.roleName.$invalid">
+                                                            <span ng-show="roleCreateForm.roleName.$error.required">请填写菜单名称</span>
+                                                        </p>
+													</div>
+												</div>
+											</div>
+											<div class="space-5"></div>
+                                            <div class="modal-footer no-margin-top">
+                                                <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+                                                    <i class="icon-remove"></i>
+                                                    取消
+                                                </button>
+                                                <button type="submit" class="btn btn-sm btn-success" ng-disabled="roleCreateForm.$invalid">
+                                                    <i class="icon-ok"></i>
+                                                    确定
+                                                </button>
+                                            </div>
+										</form>
+
+
+									</div><!-- /.modal-content -->
+								</div><!-- /.modal-dialog -->
+							</div><!-- /.modal create end -->
+
+
+							<!--modal-edit-->
+							<div id="modal-edit" class="modal fade" tabindex="-1">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header no-padding">
+											<div class="table-header">
+												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+													<span class="white">&times;</span>
+												</button>
+												 <span style="color: red;">{{selectRole.rolename}}</span> 菜单分配
+											</div>
+										</div>
+
+										<div class="modal-body no-padding" name="roleEditForm">
+											<div class="space-5"></div>
+											<div class="profile-user-info profile-user-info-striped">
+												<div style="margin: 10px;">
+								<span class="input-icon">
+									<input type="text" placeholder="菜单名称 ..." class="nav-search-input"
+										   autocomplete="off" name="menuname" ng-model="menuSearchText.menuname"/>
+									<i class="icon-search nav-search-icon"></i>
+								</span>
+												</div>
+												<div class="table-responsive">
+													<table class="table table-striped table-bordered table-hover table-checkable dataTable table-responsive">
+														<thead>
+														<tr>
+															<th ng-click="predicate = 'checked'; reverse=!reverse" class="center">
+																<label>
+																	<input type="checkbox" class="ace"/>
+																	<span class="lbl"></span>
+																</label>
+															</th>
+															<th ng-click="predicate = 'menuname'; reverse=!reverse"><a style="color: #707070;cursor: pointer;text-decoration:none;">菜单名称</a></th>
+															<th ng-click="predicate = 'action'; reverse=!reverse"><a style="color: #707070;cursor: pointer;text-decoration:none;">动作</a></th>
+														</tr>
+														</thead>
+														<tbody>
+														<tr ng-repeat="menu in roleMenuList  | filter: menuSearchText | orderBy: predicate:reverse">
+															<td class="center">
+																<label>
+																	<input ng-model="menu.checked" type="checkbox" class="ace"/>
+																	<span class="lbl"></span>
+																</label>
+															</td>
+															<td>{{ menu.menuname }}</td>
+															<td>{{ menu.action }}</td>
+														</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+											<div class="space-5"></div>
+											<div class="modal-footer no-margin-top">
+												<button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+													<i class="icon-remove"></i>
+													取消
+												</button>
+												<button type="button" class="btn btn-sm btn-success" ng-click="updateRoleMenu()">
+													<i class="icon-edit"></i>
+													确定
+												</button>
+											</div>
+										</div>
+
+
+									</div><!-- /.modal-content -->
+								</div><!-- /.modal-dialog -->
+							</div><!-- /.modal edit end -->
+							<div id="modal-delete" class="modal fade" tabindex="-1">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header no-padding">
+											<div class="table-header">
+												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+													<span class="white">&times;</span>
+												</button>
+												删除菜单提示！
+											</div>
+										</div>
+
+										<div class="modal-body no-padding">
+											<div class="profile-user-info profile-user-info-striped">
+												<div class="profile-info-row">
+													<p><span>您确认要删除菜单 </span><strong style="color: red;">{{selectRole.rolename}}</strong> 吗？</p>
+												</div>
+											</div>
+										</div>
+
+										<div class="modal-footer no-margin-top">
+											<button class="btn btn-sm btn-info pull-left" data-dismiss="modal">
+												<i class="icon-remove"></i>
+												取消
+											</button>
+											<button class="btn btn-sm btn-danger" ng-click="deleteRole(selectRole)">
+												<i class="icon-trash"></i>
+												删除
+											</button>
+										</div>
+									</div><!-- /.modal-content -->
+								</div><!-- /.modal-dialog -->
+							</div><!-- /.modal delete end -->
+
+								<div id="modal-table" class="modal fade" tabindex="-1">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header no-padding">
+												<div class="table-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+														<span class="white">&times;</span>
+													</button>
+													Results for "Latest Registered Domains
+												</div>
+											</div>
+
+											<div class="modal-body no-padding">
+												<table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+													<thead>
+														<tr>
+															<th>Domain</th>
+															<th>Price</th>
+															<th>Clicks</th>
+
+															<th>
+																<i class="icon-time bigger-110"></i>
+																Update
+															</th>
+														</tr>
+													</thead>
+
+													<tbody>
+														<tr>
+															<td>
+																<a href="#">ace.com</a>
+															</td>
+															<td>$45</td>
+															<td>3,330</td>
+															<td>Feb 12</td>
+														</tr>
+
+														<tr>
+															<td>
+																<a href="#">base.com</a>
+															</td>
+															<td>$35</td>
+															<td>2,595</td>
+															<td>Feb 18</td>
+														</tr>
+
+														<tr>
+															<td>
+																<a href="#">max.com</a>
+															</td>
+															<td>$60</td>
+															<td>4,400</td>
+															<td>Mar 11</td>
+														</tr>
+
+														<tr>
+															<td>
+																<a href="#">best.com</a>
+															</td>
+															<td>$75</td>
+															<td>6,500</td>
+															<td>Apr 03</td>
+														</tr>
+
+														<tr>
+															<td>
+																<a href="#">pro.com</a>
+															</td>
+															<td>$55</td>
+															<td>4,250</td>
+															<td>Jan 21</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+
+											<div class="modal-footer no-margin-top">
+												<button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+													<i class="icon-remove"></i>
+													关闭
+												</button>
+												<button class="btn btn-sm btn-success" data-dismiss="modal">
+													<i class="icon-ok"></i>
+													确定
+												</button>
+											</div>
+										</div><!-- /.modal-content -->
+									</div><!-- /.modal-dialog -->
+							</div><!-- /.modal -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div><!-- /.main-content -->
+				<div th:include="../fragments/setting :: setting"></div>
+			</div><!-- /.main-container-inner -->
+
+	<div th:include="../fragments/footer :: footer"></div>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+
+		<script src="js/module/ace/js/jquery-2.0.3.min.js"></script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script src="js/module/ace/js/jquery-1.10.2.min.js"></script>
+<![endif]-->
+
+		<!--[if !IE]> -->
+
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='js/module/ace/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+		</script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='js/module/ace/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+		<script type="text/javascript">
+			if("ontouchend" in document) document.write("<script src='js/module/ace/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+		</script>
+		<script src="js/module/ace/js/bootstrap.min.js"></script>
+		<script src="js/module/ace/js/typeahead-bs2.min.js"></script>
+
+		<!-- page specific plugin scripts -->
+
+		<!--<script src="js/module/ace/js/jquery.dataTables.min.js"></script>-->
+		<!--<script src="js/module/ace/js/jquery.dataTables.bootstrap.js"></script>-->
+
+		<!-- ace scripts -->
+	<script src="js/module/ace/js/jquery-ui-1.10.3.custom.min.js"></script>
+	<script src="js/module/ace/js/jquery.ui.touch-punch.min.js"></script>
+	<script src="js/module/ace/js/chosen.jquery.min.js"></script>
+	<script src="js/module/ace/js/fuelux/fuelux.spinner.min.js"></script>
+	<script src="js/module/ace/js/date-time/moment.min.js"></script>
+	<script src="js/module/ace/js/bootstrap-colorpicker.min.js"></script>
+	<script src="js/module/ace/js/jquery.knob.min.js"></script>
+	<script src="js/module/ace/js/jquery.autosize.min.js"></script>
+	<script src="js/module/ace/js/jquery.inputlimiter.1.3.1.min.js"></script>
+	<script src="js/module/ace/js/jquery.maskedinput.min.js"></script>
+	<script src="js/module/ace/js/bootstrap-tag.min.js"></script>
+	<script src="js/module/ace/js/ace-elements.min.js"></script>
+	<script src="js/module/ace/js/ace.min.js"></script>
+	<script src="js/module/ace/js/chosen.jquery.min.js"></script>
+	<script type="text/javascript">
+        jQuery(function ($) {
+            $(".chosen-select").chosen();
+            $(".chosen-container").css("width","50%");
+            $("#create_status").css("width","30%");
+            $("#create_gender").css("width","30%");
+            $("#create_status").css("width","30%");
+            $("#create_gender").css("width","30%");
+            $("#edit_status").css("width","30%");
+            $("#edit_gender").css("width","30%");
+        });
+	</script>
+	<script src="js/module/jqPaginator.min.js"></script>
+	<script src="js/module/angular.min.js"></script>
+	<script src="js/main/menulist.js"></script>
+	<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+</body>
+</html>

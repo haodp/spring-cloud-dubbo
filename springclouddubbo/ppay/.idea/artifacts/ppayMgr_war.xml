@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ppayMgr:war">
+    <output-path>$PROJECT_DIR$/ppayMgr/target</output-path>
+    <root id="archive" name="ppayMgr.war">
+      <element id="artifact" artifact-name="ppayMgr:war exploded" />
+    </root>
+  </artifact>
+</component>

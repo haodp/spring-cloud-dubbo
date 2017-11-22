@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lakala.dao.manual.mapper.MalMenuMapper">
+    <resultMap id="MenuResultMap" type="com.lakala.dao.manual.model.MalMenu">
+        <result column="menu_id" jdbcType="VARCHAR" property="menuId"/>
+        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+        <result column="menu_name" jdbcType="VARCHAR" property="menuName"/>
+        <result column="action" jdbcType="VARCHAR" property="action"/>
+        <result column="row_sort" jdbcType="INTEGER" property="sort"/>
+        <result column="flag" jdbcType="INTEGER" property="flag"/>
+        <result column="role_id" jdbcType="INTEGER" property="roleId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="user_status" jdbcType="INTEGER" property="userStatus"/>
+    </resultMap>
+
+    <select id="getMenuListByUserId" parameterType="java.lang.String" resultMap="MenuResultMap">
+        SELECT
+    m.uuid menu_id,
+    m.parent_id,
+    m.menu_name,
+    m.action,
+    m.row_sort,
+    m.flag,
+    r.uuid role_id,
+    u.uuid user_id,
+    u.username,
+    u.real_name,
+    u.status user_status
+FROM t_menu m
+        INNER JOIN t_role_menu rm ON rm.menu_id = m.uuid
+        INNER JOIN t_role r ON r.uuid = rm.role_id
+        INNER JOIN t_user_role ur ON ur.role_id = r.uuid
+        INNER JOIN t_user u ON u.uuid = ur.user_id
+WHERE
+    m.flag = 1 AND u.uuid = #{userId} order by m.row_sort
+    </select>
+</mapper>

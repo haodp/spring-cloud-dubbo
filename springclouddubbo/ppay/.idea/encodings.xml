@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/config-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/config-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eureka-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gate" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gate/gateApi" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gate/gateConsume" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gate/gateProvider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gate/ppayGateApi" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gate/ppayGateProvider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ppay-admin-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ppay-config" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ppay-config-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ppay-mgr" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ppay-tc-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ppay-tc-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ppay-tc-tx-dubbo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ppay-tc-tx-manager" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zipkin-monitor" charset="UTF-8" />
+  </component>
+</project>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>ppayMgr</title>
+	<meta name="keywords" content="拉卡拉管理登录页面" />
+	<meta name="description" content="登录页面" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link type="image/x-icon" href="images/favicon.ico" rel="shortcut icon">
+		<!-- basic styles -->
+
+		<link href="js/module/ace/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="js/module/ace/css/font-awesome.min.css" />
+
+		<!--[if IE 7]>
+		  <link rel="stylesheet" href="js/module/ace/css/font-awesome-ie7.min.css" />
+		<![endif]-->
+
+		<!-- page specific plugin styles -->
+
+		<!-- fonts -->
+
+		<link rel="stylesheet" href="js/module/ace/css/fontface.css"/>
+
+		<!-- ace styles -->
+
+		<link rel="stylesheet" href="js/module/ace/css/ace.min.css" />
+		<link rel="stylesheet" href="js/module/ace/css/ace-rtl.min.css" />
+
+		<!--[if lte IE 8]>
+		  <link rel="stylesheet" href="js/module/ace/css/ace-ie.min.css" />
+		<![endif]-->
+
+		<!-- inline styles related to this page -->
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+		<!--[if lt IE 9]>
+		<script src="js/module/ace/js/html5shiv.js"></script>
+		<script src="js/module/ace/js/respond.min.js"></script>
+		<![endif]-->
+	</head>
+
+	<body class="login-layout">
+		<div class="main-container" ng-app="mainApp" ng-controller="mainCtrl">
+			<div class="main-content">
+				<div class="row">
+					<div class="col-sm-10 col-sm-offset-1">
+						<div class="login-container">
+							<div class="center">
+								<h1>
+									<i class="icon-leaf white"></i>
+									<span class="red">ppayMgr</span>
+								</h1>
+								<h4 class="blue"></h4>
+							</div>
+
+							<div class="space-6"></div>
+
+							<div class="position-relative">
+								<div id="login-box" class="login-box visible widget-box no-border">
+									<div class="widget-body">
+										<div class="widget-main">
+											<h4 class="header blue lighter bigger">
+												<i class="icon-coffee green"></i>
+												用户登录
+											</h4>
+
+											<div class="space-6"></div>
+
+											<form name="userLoginForm" ng-submit="userLogin(loginUser,userLoginForm.$valid)" novalidate>
+												<fieldset>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="text" class="form-control" name="username" ng-model="loginUser.username" placeholder="用户名" required />
+															<i class="icon-user"></i>
+														</span>
+													</label>
+													<p style="color:red" ng-show="userLoginForm.username.$dirty && userLoginForm.username.$invalid">
+														<span ng-show="userLoginForm.username.$error.required">用户名不能为空</span>
+													</p>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" name="password" class="form-control" ng-model="loginUser.password" placeholder="密码" required />
+															<i class="icon-lock"></i>
+														</span>
+													</label>
+													<p style="color:red" ng-show="userLoginForm.password.$dirty && userLoginForm.password.$invalid">
+														<span ng-show="userLoginForm.password.$error.required">密码不能为空</span>
+													</p>
+													<p style="color:red" id="loginError">
+														{{loginErrorMsg}}
+													</p>
+													<div class="space"></div>
+
+													<div class="clearfix">
+														<label class="inline">
+															<input type="checkbox" ng-model="loginUser.remember" class="ace" />
+															<span class="lbl"> 记住我</span>
+														</label>
+
+														<button type="submit" class="width-35 pull-right btn btn-sm btn-primary" ng-disabled="userLoginForm.$invalid">
+															<i class="icon-key"></i>
+															登录
+														</button>
+													</div>
+
+													<div class="space-4"></div>
+												</fieldset>
+											</form>
+
+										</div><!-- /widget-main -->
+									</div><!-- /widget-body -->
+								</div><!-- /login-box -->
+
+							</div><!-- /position-relative -->
+						</div>
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+
+		<script src="js/module/ace/js/jquery-2.0.3.min.js"></script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script src="js/module/ace/js/jquery-1.10.2.min.js"></script>
+<![endif]-->
+
+		<!--[if !IE]> -->
+
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='js/module/ace/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+		</script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='js/module/ace/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+		<script type="text/javascript">
+			if("ontouchend" in document) document.write("<script src='js/module/ace/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+		</script>
+
+		<!-- inline scripts related to this page -->
+
+		<script type="text/javascript">
+			function show_box(id) {
+			 jQuery('.widget-box.visible').removeClass('visible');
+			 jQuery('#'+id).addClass('visible');
+			}
+		</script>
+		<script src="js/module/angular.min.js"></script>
+		<script src="js/main/login.js"></script>
+	<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+</body>
+</html>

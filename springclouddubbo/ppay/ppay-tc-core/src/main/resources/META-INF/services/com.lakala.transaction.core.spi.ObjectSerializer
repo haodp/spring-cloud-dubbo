@@ -1,0 +1,4 @@
+com.lakala.transaction.core.spi.serializer.KryoSerializer
+com.lakala.transaction.core.spi.serializer.ProtostuffSerializer
+com.lakala.transaction.core.spi.serializer.HessianSerializer
+com.lakala.transaction.core.spi.serializer.JavaSerializer

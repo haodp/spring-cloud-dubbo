@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/config-client/config-client.iml" filepath="$PROJECT_DIR$/config-client/config-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/config-server/config-server.iml" filepath="$PROJECT_DIR$/config-server/config-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/eureka-server/eureka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gate/gate.iml" filepath="$PROJECT_DIR$/gate/gate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gate/gateApi/gateApi.iml" filepath="$PROJECT_DIR$/gate/gateApi/gateApi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gate/gateConsume/gateConsume.iml" filepath="$PROJECT_DIR$/gate/gateConsume/gateConsume.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gate/gateProvider/gateProvider.iml" filepath="$PROJECT_DIR$/gate/gateProvider/gateProvider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ppay.iml" filepath="$PROJECT_DIR$/ppay.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ppay-admin-server/ppay-admin-server.iml" filepath="$PROJECT_DIR$/ppay-admin-server/ppay-admin-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ppay-config/ppay-config.iml" filepath="$PROJECT_DIR$/ppay-config/ppay-config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ppay-config-client/ppay-config-client.iml" filepath="$PROJECT_DIR$/ppay-config-client/ppay-config-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ppay-mgr/ppay-mgr.iml" filepath="$PROJECT_DIR$/ppay-mgr/ppay-mgr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ppay-tc-common/ppay-tc-common.iml" filepath="$PROJECT_DIR$/ppay-tc-common/ppay-tc-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ppay-tc-core/ppay-tc-core.iml" filepath="$PROJECT_DIR$/ppay-tc-core/ppay-tc-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ppay-tc-tx-dubbo/ppay-tc-tx-dubbo.iml" filepath="$PROJECT_DIR$/ppay-tc-tx-dubbo/ppay-tc-tx-dubbo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ppay-tc-tx-manager/ppay-tc-tx-manager.iml" filepath="$PROJECT_DIR$/ppay-tc-tx-manager/ppay-tc-tx-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gate/ppayGateApi/ppayGateApi.iml" filepath="$PROJECT_DIR$/gate/ppayGateApi/ppayGateApi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gate/ppayGateProvider/ppayGateProvider.iml" filepath="$PROJECT_DIR$/gate/ppayGateProvider/ppayGateProvider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zipkin-monitor/zipkin-monitor.iml" filepath="$PROJECT_DIR$/zipkin-monitor/zipkin-monitor.iml" />
+    </modules>
+  </component>
+</project>

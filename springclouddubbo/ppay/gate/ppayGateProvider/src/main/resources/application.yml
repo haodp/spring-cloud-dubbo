@@ -1,0 +1,31 @@
+server:
+  port: 8082
+  contextPath: /
+  address: 0.0.0.0
+
+spring:
+    datasource:
+        driver-class-name:  oracle.jdbc.driver.OracleDriver
+        url: jdbc:oracle:thin:@10.7.111.221:1521:reportdb
+        username: fin_merchant
+        password: abc123
+    application:
+      name: stock-service
+
+mybatis:
+  type-aliases-package: com.lakala.ppaygate.api.entity
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+logging:
+    level:
+        root: error
+        org.springframework.web: info
+        org.apache.ibatis: debug
+        com.lakala.bonuspoint: debug
+        com.lakala.lottery: debug
+        com.lakala: debug
+
+    path: "./logs"
+
+
